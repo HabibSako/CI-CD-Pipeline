@@ -31,7 +31,16 @@ class Users(Resource):
         data.to_csv('kullanici.csv', index=False)
         return {'message': 'Kayıt başarıyla eklendi.'}, 200
 
-    
+    def delete(self):
+        name = request.args['name']
+        data = pd.read_csv('kullanici.csv')
+
+        if name in data['name'].values:
+            data = data[data['name'] != name]
+            data.to_csv('kullanici.csv', index=False)
+            return {'message': 'Kayıt başarıyla silindi.'}, 200
+        else:
+            return {'message': 'Kayıt bulunamadı.'}, 404
 
 class Cities(Resource):
     def get(self):
