@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python ornek.py
+    volumes:
+      - .:/app
+    ports:
+      - "5003:5003"
